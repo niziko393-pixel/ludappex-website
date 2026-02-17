@@ -824,11 +824,12 @@
 <body>
 
 <!-- ========== VIDEO INTRO OVERLAY ========== -->
-<div id="introOverlay">
+<div id="introOverlay" onclick="enableSound()">
     <video id="introVideo" muted playsinline>
         <source src="intro.mp4" type="video/mp4">
     </video>
-    <button id="skipBtn" onclick="skipIntro()">Skip ⟩</button>
+    <div id="soundHint">🔇 Tap for sound</div>
+    <button id="skipBtn" onclick="event.stopPropagation(); skipIntro()">Skip ⟩</button>
 </div>
 
 <style>
@@ -837,12 +838,13 @@
         top: 0; left: 0;
         width: 100vw;
         height: 100vh;
-        background: #0D1117;
+        background: #000000;
         z-index: 9999;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: opacity 0.8s ease;
+        cursor: pointer;
     }
 
     #introOverlay.fade-out {
@@ -851,9 +853,31 @@
     }
 
     #introVideo {
-        max-width: 80%;
-        max-height: 80vh;
-        border-radius: 16px;
+        width: 100vw;
+        height: 100vh;
+        object-fit: contain;
+        background: #000000;
+    }
+
+    #soundHint {
+        position: absolute;
+        top: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.5rem 1.2rem;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        font-family: inherit;
+        transition: opacity 0.5s;
+        pointer-events: none;
+    }
+
+    #soundHint.hidden {
+        opacity: 0;
     }
 
     #skipBtn {
@@ -1283,6 +1307,15 @@
 
 <script>
 // ========== VIDEO INTRO ==========
+function enableSound() {
+    const video = document.getElementById('introVideo');
+    const hint = document.getElementById('soundHint');
+    if (video.muted) {
+        video.muted = false;
+        hint.classList.add('hidden');
+    }
+}
+
 function skipIntro() {
     const overlay = document.getElementById('introOverlay');
     const video = document.getElementById('introVideo');
@@ -1300,9 +1333,8 @@ window.addEventListener('DOMContentLoaded', () => {
     
     document.body.style.overflow = 'hidden';
     
-    // Try to autoplay
+    // Try to autoplay (muted first, browsers require this)
     video.play().catch(() => {
-        // If autoplay blocked, skip intro
         skipIntro();
     });
     
