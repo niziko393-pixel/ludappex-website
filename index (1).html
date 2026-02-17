@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludappex — Games & ERP Solutions</title>
+    <meta name="description" content="Ludappex LLC — Mobile Games & Affordable ERP Solutions for Small Businesses">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #06080d;
+            --bg-secondary: #0c1018;
+            --bg-card: #111827;
+            --bg-card-hover: #1a2235;
+            --border: #1e293b;
+            --border-light: #2a3a52;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #06b6d4;
+            --accent-dim: rgba(6, 182, 212, 0.12);
+            --accent2: #a855f7;
+            --accent2-dim: rgba(168, 85, 247, 0.12);
+            --accent3: #f97316;
+            --accent3-dim: rgba(249, 115, 22, 0.12);
+            --success: #22c55e;
+            --gradient-1: linear-gradient(135deg, #06b6d4, #3b82f6);
+            --gradient-2: linear-gradient(135deg, #a855f7, #ec4899);
+            --gradient-3: linear-gradient(135deg, #f97316, #eab308);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(6, 8, 13, 0.8);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .navbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo-img {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 2px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 3px;
+            border: 1px solid var(--border);
+        }
+
+        .lang-btn {
+            padding: 0.3rem 0.6rem;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.06) 0%, transparent 50%);
+            animation: heroFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-2%, -2%); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-dim);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            border-radius: 100px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            animation: fadeUp 0.8s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            animation: fadeUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeUp 0.8s ease 0.3s both;
+        }
+
+        .btn {
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.06);
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== SECTIONS ========== */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== GAMES SECTION ========== */
+        #games { border-top: 1px solid var(--border); }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+
+        .game-card:nth-child(1)::before { background: var(--gradient-1); }
+        .game-card:nth-child(2)::before { background: var(--gradient-2); }
+        .game-card:nth-child(3)::before { background: var(--gradient-3); }
+        .game-card:nth-child(4)::before { background: linear-gradient(135deg, #22c55e, #06b6d4); }
+        .game-card:nth-child(5)::before { background: linear-gradient(135deg, #ec4899, #f97316); }
+        .game-card:nth-child(6)::before { background: linear-gradient(135deg, #eab308, #22c55e); }
+
+        .game-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .game-card:nth-child(1) .game-icon { background: var(--accent-dim); }
+        .game-card:nth-child(2) .game-icon { background: var(--accent2-dim); }
+        .game-card:nth-child(3) .game-icon { background: var(--accent3-dim); }
+        .game-card:nth-child(4) .game-icon { background: rgba(34, 197, 94, 0.12); }
+        .game-card:nth-child(5) .game-icon { background: rgba(236, 72, 153, 0.12); }
+        .game-card:nth-child(6) .game-icon { background: rgba(234, 179, 8, 0.12); }
+
+        .game-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .game-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .game-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .store-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .store-badge {
+            padding: 0.35rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .store-badge.coming { color: var(--accent); border-color: rgba(6,182,212,0.3); }
+
+        /* ========== ERP SECTION ========== */
+        #erp {
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        #erp::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(168, 85, 247, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .erp-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .erp-hero-text h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .erp-hero-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .erp-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .erp-stat {
+            text-align: center;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .erp-stat .number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .erp-stat .label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .erp-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .erp-feature {
+            padding: 1.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: all 0.3s;
+        }
+
+        .erp-feature:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+        }
+
+        .erp-feature-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .erp-feature h4 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .erp-feature p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .erp-industries {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .industry-pill {
+            padding: 0.5rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+        }
+
+        .industry-pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ========== ABOUT ========== */
+        #about { border-top: 1px solid var(--border); }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .about-values {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .value-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .value-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-dim);
+            border-radius: 10px;
+        }
+
+        .value-card h4 {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .value-card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* ========== PRIVACY ========== */
+        #privacy { border-top: 1px solid var(--border); }
+
+        .privacy-content {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .privacy-block {
+            margin-bottom: 2rem;
+        }
+
+        .privacy-block h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .privacy-block p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .privacy-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.25rem;
+            margin: 0.75rem 0;
+        }
+
+        .privacy-card p {
+            margin-bottom: 0.4rem;
+            font-size: 0.88rem;
+        }
+
+        .privacy-card p:last-child { margin-bottom: 0; }
+
+        .privacy-highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ========== CONTACT ========== */
+        #contact { border-top: 1px solid var(--border); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--border-light);
+        }
+
+        .contact-item-icon {
+            font-size: 1.2rem;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-dim);
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .contact-item-text .label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-item-text .value {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .contact-item-text a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea { min-height: 120px; resize: vertical; }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-logo-img {
+            height: 48px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .erp-hero,
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0; right: 0;
+                background: var(--bg-secondary);
+                border-bottom: 1px solid var(--border);
+                padding: 1rem;
+            }
+
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .games-grid { grid-template-columns: 1fr; }
+            .erp-stats { grid-template-columns: repeat(3, 1fr); }
+            .erp-features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== VIDEO INTRO OVERLAY ========== -->
+<div id="introOverlay" onclick="enableSound()">
+    <video id="introVideo" muted playsinline>
+        <source src="intro.mp4" type="video/mp4">
+    </video>
+    <div id="soundHint">🔇 Tap for sound</div>
+    <button id="skipBtn" onclick="event.stopPropagation(); skipIntro()">Skip ⟩</button>
+</div>
+
+<style>
+    #introOverlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #000000;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.8s ease;
+        cursor: pointer;
+    }
+
+    #introOverlay.fade-out {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    #introVideo {
+        width: 100vw;
+        height: 100vh;
+        object-fit: contain;
+        background: #000000;
+    }
+
+    #soundHint {
+        position: absolute;
+        top: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.5rem 1.2rem;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        font-family: inherit;
+        transition: opacity 0.5s;
+        pointer-events: none;
+    }
+
+    #soundHint.hidden {
+        opacity: 0;
+    }
+
+    #skipBtn {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        padding: 0.6rem 1.5rem;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: rgba(255,255,255,0.7);
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.2s;
+    }
+
+    #skipBtn:hover {
+        background: rgba(255,255,255,0.2);
+        color: white;
+    }
+</style>
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="#" class="nav-logo">
+            <img src="logo.svg" alt="LUDAPPEX" class="nav-logo-img">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" data-i18n="nav_home">Home</a></li>
+            <li><a href="#games" data-i18n="nav_games">Games</a></li>
+            <li><a href="#erp" data-i18n="nav_erp">ERP Solutions</a></li>
+            <li><a href="#about" data-i18n="nav_about">About</a></li>
+            <li><a href="#privacy" data-i18n="nav_privacy">Privacy</a></li>
+            <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('az')">AZ</button>
+                <button class="lang-btn" onclick="setLang('tr')">TR</button>
+                <button class="lang-btn" onclick="setLang('ru')">RU</button>
+                <button class="lang-btn" onclick="setLang('ja')">JP</button>
+            </div>
+            <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="hero-badge" data-i18n="hero_badge">🚀 Games & Enterprise Solutions</div>
+        <h1><span data-i18n="hero_title_1">Build. Play.</span><br><span class="gradient-text" data-i18n="hero_title_2">Grow Your Business.</span></h1>
+        <p data-i18n="hero_desc">Mobile games that entertain and affordable ERP solutions that empower small businesses — all from your pocket.</p>
+        <div class="hero-buttons">
+            <a href="#games" class="btn btn-primary" data-i18n="hero_btn_games">🎮 Explore Games</a>
+            <a href="#erp" class="btn btn-secondary" data-i18n="hero_btn_erp">📊 ERP Solutions</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== GAMES ========== -->
+<section class="section" id="games">
+    <div class="section-header">
+        <div class="section-tag" data-i18n="games_tag">Games</div>
+        <h2 class="section-title" data-i18n="games_title">Our Games</h2>
+        <p class="section-desc" data-i18n="games_desc">Fun, engaging mobile games built with passion and attention to detail.</p>
+    </div>
+
+    <div class="games-grid">
+        <div class="game-card">
+            <div class="game-icon">🪰</div>
+            <h3>Fly Swatter Frenzy</h3>
+            <p data-i18n="game1_desc">A fun fly swatter game with realistic timing mechanics. Test your reflexes and compete for high scores!</p>
+            <div class="game-tags">
+                <span class="game-tag">Arcade</span>
+                <span class="game-tag">Casual</span>
+                <span class="game-tag">Reflexes</span>
+            </div>
+            <div class="store-badges">
+                <span class="store-badge coming">▶ Google Play — <span data-i18n="coming_soon">Coming Soon</span></span>
+                <span class="store-badge coming"> App Store — <span data-i18n="coming_soon">Coming Soon</span></span>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🏎️</div>
+            <h3>Crossroad Rush</h3>
+            <p data-i18n="game2_desc">Navigate through traffic jams and find your way out! Unique feature: flip your car once per level to escape tricky situations — not found in other games!</p>
+            <div class="game-tags">
+                <span class="game-tag">Racing</span>
+                <span class="game-tag">Action</span>
+                <span class="game-tag">Traffic Jam</span>
+            </div>
+            <div class="store-badges">
+                <span class="store-badge coming">▶ Google Play — <span data-i18n="coming_soon">Coming Soon</span></span>
+                <span class="store-badge coming"> App Store — <span data-i18n="coming_soon">Coming Soon</span></span>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🦤</div>
+            <h3>Ozzy vs Dodo</h3>
+            <p data-i18n="game3_desc">A speed battle between Ozzy and the Dodo! Match the colors, collect points, and unlock exclusive skins.</p>
+            <div class="game-tags">
+                <span class="game-tag">Speed Battle</span>
+                <span class="game-tag">Color Match</span>
+                <span class="game-tag">Skins</span>
+            </div>
+            <div class="store-badges">
+                <span class="store-badge coming">▶ Google Play — <span data-i18n="coming_soon">Coming Soon</span></span>
+                <span class="store-badge coming"> App Store — <span data-i18n="coming_soon">Coming Soon</span></span>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🧱</div>
+            <h3>Stack Builder Pro</h3>
+            <p data-i18n="game4_desc">Build skyscrapers in various cities around the world! Stack with precision, compare your towers with city skylines, and explore different architectural styles.</p>
+            <div class="game-tags">
+                <span class="game-tag">Casual</span>
+                <span class="game-tag">Stacking</span>
+                <span class="game-tag">Precision</span>
+            </div>
+            <div class="store-badges">
+                <span class="store-badge coming">▶ Google Play — <span data-i18n="coming_soon">Coming Soon</span></span>
+                <span class="store-badge coming"> App Store — <span data-i18n="coming_soon">Coming Soon</span></span>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🌸</div>
+            <h3>Flower Rain</h3>
+            <p data-i18n="game5_desc">Catch falling flowers in this relaxing yet challenging game. Enjoy beautiful visuals and calming gameplay!</p>
+            <div class="game-tags">
+                <span class="game-tag">Casual</span>
+                <span class="game-tag">Relaxing</span>
+                <span class="game-tag">Beautiful</span>
+            </div>
+            <div class="store-badges">
+                <span class="store-badge coming">▶ Google Play — <span data-i18n="coming_soon">Coming Soon</span></span>
+                <span class="store-badge coming"> App Store — <span data-i18n="coming_soon">Coming Soon</span></span>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <div class="game-icon">🦩</div>
+            <h3>Ostrich vs Monkey</h3>
+            <p data-i18n="game6_desc">Collect the eggs into the basket without the cheeky monkey breaking them! A fun and fast-paced egg catcher game with exciting challenges.</p>
+            <div class="game-tags">
+                <span class="game-tag">Casual</span>
+                <span class="game-tag">Egg Catcher</span>
+                <span class="game-tag">Fun</span>
+            </div>
+            <div class="store-badges">
+                <span class="store-badge coming">▶ Google Play — <span data-i18n="coming_soon">Coming Soon</span></span>
+                <span class="store-badge coming"> App Store — <span data-i18n="coming_soon">Coming Soon</span></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ERP ========== -->
+<section class="section" id="erp">
+    <div class="section-header">
+        <div class="section-tag" data-i18n="erp_tag">ERP Solutions</div>
+        <h2 class="section-title" data-i18n="erp_title">Smart ERP for Small Business</h2>
+        <p class="section-desc" data-i18n="erp_desc">Affordable, mobile-first ERP solutions — your entire business in your pocket. No expensive hardware required.</p>
+    </div>
+
+    <div class="erp-hero">
+        <div class="erp-hero-text">
+            <h3 data-i18n="erp_hero_title">All your reports, 24/7, in your pocket</h3>
+            <p data-i18n="erp_hero_desc">Track expenses, revenue, and inventory in real-time from your mobile device. Industry-specific solutions tailored for your business type.</p>
+            <a href="#contact" class="btn btn-primary" data-i18n="erp_hero_btn">📞 Request a Demo</a>
+        </div>
+        <div class="erp-stats">
+            <div class="erp-stat">
+                <div class="number">24/7</div>
+                <div class="label" data-i18n="erp_stat1">Access</div>
+            </div>
+            <div class="erp-stat">
+                <div class="number">0₼</div>
+                <div class="label" data-i18n="erp_stat2">Extra Hardware</div>
+            </div>
+            <div class="erp-stat">
+                <div class="number">100%</div>
+                <div class="label" data-i18n="erp_stat3">Mobile</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="erp-features">
+        <div class="erp-feature">
+            <div class="erp-feature-icon">📊</div>
+            <h4 data-i18n="erp_f1_title">Accounting & Finance</h4>
+            <p data-i18n="erp_f1_desc">Track all income, expenses, and financial reports in real-time.</p>
+        </div>
+        <div class="erp-feature">
+            <div class="erp-feature-icon">📦</div>
+            <h4 data-i18n="erp_f2_title">Inventory Management</h4>
+            <p data-i18n="erp_f2_desc">Monitor stock levels, track products, and manage warehouse operations.</p>
+        </div>
+        <div class="erp-feature">
+            <div class="erp-feature-icon">🛒</div>
+            <h4 data-i18n="erp_f3_title">Sales & CRM</h4>
+            <p data-i18n="erp_f3_desc">Manage customer relationships, orders, and sales analytics.</p>
+        </div>
+        <div class="erp-feature">
+            <div class="erp-feature-icon">👥</div>
+            <h4 data-i18n="erp_f4_title">HR & Workforce</h4>
+            <p data-i18n="erp_f4_desc">Employee management, attendance tracking, and payroll calculations.</p>
+        </div>
+        <div class="erp-feature">
+            <div class="erp-feature-icon">🏭</div>
+            <h4 data-i18n="erp_f5_title">Production Tracking</h4>
+            <p data-i18n="erp_f5_desc">Monitor manufacturing processes, raw materials, and production costs.</p>
+        </div>
+        <div class="erp-feature">
+            <div class="erp-feature-icon">📱</div>
+            <h4 data-i18n="erp_f6_title">Mobile-First Design</h4>
+            <p data-i18n="erp_f6_desc">Built for smartphones — no need for expensive computers or servers.</p>
+        </div>
+    </div>
+
+    <div class="section-header" style="margin-bottom: 1.5rem;">
+        <div class="section-tag" data-i18n="erp_industries_tag">Industry Solutions</div>
+        <p class="section-desc" data-i18n="erp_industries_desc">Tailored for specific business types with industry-specific features.</p>
+    </div>
+
+    <div class="erp-industries">
+        <div class="industry-pill">🌱 <span data-i18n="ind_agri">Agriculture</span></div>
+        <div class="industry-pill">🛍️ <span data-i18n="ind_retail">Retail</span></div>
+        <div class="industry-pill">🍰 <span data-i18n="ind_bakery">Bakery & Confectionery</span></div>
+        <div class="industry-pill">🍽️ <span data-i18n="ind_restaurant">Restaurants</span></div>
+        <div class="industry-pill">🪟 <span data-i18n="ind_manufacturing">Window & Door Manufacturing</span></div>
+        <div class="industry-pill">🏪 <span data-i18n="ind_small">Small Shops</span></div>
+        <div class="industry-pill">➕ <span data-i18n="ind_more">And More...</span></div>
+    </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="section" id="about">
+    <div class="section-header">
+        <div class="section-tag" data-i18n="about_tag">About Us</div>
+        <h2 class="section-title" data-i18n="about_title">About Ludappex</h2>
+    </div>
+
+    <div class="about-content">
+        <div class="about-text">
+            <p data-i18n="about_p1">Ludappex LLC is a technology company focused on creating engaging mobile games and affordable business solutions for small enterprises.</p>
+            <p data-i18n="about_p2">We believe technology should be accessible to everyone. Our ERP solutions are designed to be affordable, easy to use, and require no additional hardware — everything works right from your smartphone.</p>
+            <p data-i18n="about_p3">Our games are built with passion, prioritizing player experience over aggressive monetization. We create games that are fun to play, with non-intrusive, voluntary advertising.</p>
+        </div>
+        <div class="about-values">
+            <div class="value-card">
+                <div class="value-icon">🎯</div>
+                <div>
+                    <h4 data-i18n="value1_title">User-First Approach</h4>
+                    <p data-i18n="value1_desc">Everything we build starts with the user experience in mind.</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">💡</div>
+                <div>
+                    <h4 data-i18n="value2_title">Affordable Innovation</h4>
+                    <p data-i18n="value2_desc">Enterprise-grade solutions at prices small businesses can afford.</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">📱</div>
+                <div>
+                    <h4 data-i18n="value3_title">Mobile-First</h4>
+                    <p data-i18n="value3_desc">Built for the mobile generation — your tools, always with you.</p>
+                </div>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🔒</div>
+                <div>
+                    <h4 data-i18n="value4_title">Privacy & Security</h4>
+                    <p data-i18n="value4_desc">Your data is yours. We take security and privacy seriously.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PRIVACY POLICY ========== -->
+<section class="section" id="privacy">
+    <div class="section-header">
+        <div class="section-tag" data-i18n="privacy_tag">Legal</div>
+        <h2 class="section-title" data-i18n="privacy_title">Privacy Policy</h2>
+        <p class="section-desc"><span data-i18n="privacy_updated">Last updated:</span> <strong>February 18, 2026</strong></p>
+    </div>
+
+    <div class="privacy-content">
+        <div class="privacy-block">
+            <p data-i18n="privacy_intro">Ludappex LLC ("we", "our", or "us") values your privacy. This policy describes how we collect, use, and protect information across our products.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h3 data-i18n="privacy_games_title">🎮 Games</h3>
+            <p data-i18n="privacy_games_p1">Our games do not collect personally identifiable information such as your name, email, or phone number.</p>
+            <div class="privacy-card">
+                <p><strong data-i18n="privacy_admob_title">Advertising (Google AdMob):</strong></p>
+                <p data-i18n="privacy_admob_desc">Our games use Google AdMob for advertisements. AdMob may collect advertising IDs, device information, and approximate location for ad delivery. See Google's Privacy Policy for details.</p>
+            </div>
+            <div class="privacy-card">
+                <p><strong data-i18n="privacy_local_title">Local Storage:</strong></p>
+                <p data-i18n="privacy_local_desc">Game progress and settings are stored locally on your device and are never transmitted to any server.</p>
+            </div>
+        </div>
+
+        <div class="privacy-block">
+            <h3 data-i18n="privacy_erp_title">📊 ERP Solutions</h3>
+            <p data-i18n="privacy_erp_p1">Our ERP solutions may collect business-related data necessary for the operation of the service, including financial records, inventory data, employee information, and customer data.</p>
+            <div class="privacy-card">
+                <p data-i18n="privacy_erp_p2">Your data is securely protected through cloud technology. Unlike a paper ledger, there is no risk of losing your important information. We do not sell or share your business data with third parties.</p>
+            </div>
+        </div>
+
+        <div class="privacy-block">
+            <h3 data-i18n="privacy_att_title">📱 App Tracking Transparency (iOS)</h3>
+            <p data-i18n="privacy_att_desc">On iOS 14+, we request your permission before tracking activity across other apps. You may allow or deny tracking. Denying tracking means you will see non-personalized ads.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h3 data-i18n="privacy_children_title">👶 Children's Privacy</h3>
+            <p data-i18n="privacy_children_desc">Some of our games (such as Ozzy vs Dodo and Ostrich vs Monkey) are designed for children aged 4+. These games do not collect any personal data and display only child-safe, non-personalized advertisements. We comply with COPPA and all applicable child safety regulations. For our other products, standard privacy practices apply.</p>
+        </div>
+
+        <div class="privacy-block">
+            <h3 data-i18n="privacy_rights_title">⚖️ Your Rights</h3>
+            <div class="privacy-card">
+                <p data-i18n="privacy_right1">✦ Opt out of personalized advertising via device settings</p>
+                <p data-i18n="privacy_right2">✦ Request deletion of your data</p>
+                <p data-i18n="privacy_right3">✦ Access information about your stored data</p>
+                <p data-i18n="privacy_right4">✦ Contact us with any privacy concerns</p>
+            </div>
+        </div>
+
+        <div class="privacy-block">
+            <h3 data-i18n="privacy_changes_title">📝 Changes</h3>
+            <p data-i18n="privacy_changes_desc">We may update this policy periodically. Changes will be posted on this page with an updated date.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="section" id="contact">
+    <div class="section-header">
+        <div class="section-tag" data-i18n="contact_tag">Contact</div>
+        <h2 class="section-title" data-i18n="contact_title">Get in Touch</h2>
+        <p class="section-desc" data-i18n="contact_desc">Have a question, feedback, or interested in our ERP solutions? We'd love to hear from you.</p>
+    </div>
+
+    <div class="contact-grid">
+        <div class="contact-info">
+            <h3 data-i18n="contact_info_title">Contact Information</h3>
+            <p data-i18n="contact_info_desc">Reach out to us through any of the following channels.</p>
+
+            <div class="contact-item">
+                <div class="contact-item-icon">✉️</div>
+                <div class="contact-item-text">
+                    <div class="label">Email</div>
+                    <div class="value"><a href="mailto:nizamiabdullayev@ludappex.com">nizamiabdullayev@ludappex.com</a></div>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-item-icon">🌐</div>
+                <div class="contact-item-text">
+                    <div class="label" data-i18n="contact_website_label">Website</div>
+                    <div class="value"><a href="https://ludappex.com">ludappex.com</a></div>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-item-icon">📍</div>
+                <div class="contact-item-text">
+                    <div class="label" data-i18n="contact_location_label">Location</div>
+                    <div class="value" data-i18n="contact_location">Baku, Azerbaijan</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <div class="form-group">
+                <label data-i18n="form_name">Name</label>
+                <input type="text" id="formName" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="formEmail" placeholder="">
+            </div>
+            <div class="form-group">
+                <label data-i18n="form_subject">Subject</label>
+                <input type="text" id="formSubject" placeholder="">
+            </div>
+            <div class="form-group">
+                <label data-i18n="form_message">Message</label>
+                <textarea id="formMessage" placeholder=""></textarea>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="sendEmail()" data-i18n="form_submit">Send Message</button>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-logo">
+            <img src="logo.svg" alt="LUDAPPEX" class="footer-logo-img">
+        </div>
+        <div class="footer-links">
+            <a href="#games" data-i18n="nav_games">Games</a>
+            <a href="#erp" data-i18n="nav_erp">ERP Solutions</a>
+            <a href="#about" data-i18n="nav_about">About</a>
+            <a href="#privacy" data-i18n="nav_privacy">Privacy</a>
+            <a href="#contact" data-i18n="nav_contact">Contact</a>
+        </div>
+        <p>© 2026 Ludappex LLC. <span data-i18n="footer_rights">All rights reserved.</span></p>
+    </div>
+</footer>
+
+<script>
+// ========== VIDEO INTRO ==========
+function enableSound() {
+    const video = document.getElementById('introVideo');
+    const hint = document.getElementById('soundHint');
+    if (video.muted) {
+        video.muted = false;
+        hint.classList.add('hidden');
+    }
+}
+
+function skipIntro() {
+    const overlay = document.getElementById('introOverlay');
+    const video = document.getElementById('introVideo');
+    overlay.classList.add('fade-out');
+    video.pause();
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    }, 800);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('introVideo');
+    const overlay = document.getElementById('introOverlay');
+    
+    document.body.style.overflow = 'hidden';
+    
+    // Try to autoplay (muted first, browsers require this)
+    video.play().catch(() => {
+        skipIntro();
+    });
+    
+    // When video ends, fade out
+    video.addEventListener('ended', () => {
+        skipIntro();
+    });
+
+    // Check if video played once before in this session
+    try {
+        if (sessionStorage.getItem('ludappex_intro_seen')) {
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        } else {
+            sessionStorage.setItem('ludappex_intro_seen', '1');
+        }
+    } catch(e) {}
+});
+
+// ========== TRANSLATIONS ==========
+const translations = {
+    en: {
+        nav_home: "Home",
+        nav_games: "Games",
+        nav_erp: "ERP Solutions",
+        nav_about: "About",
+        nav_privacy: "Privacy",
+        nav_contact: "Contact",
+        hero_badge: "🚀 Games & Enterprise Solutions",
+        hero_title_1: "Build. Play.",
+        hero_title_2: "Grow Your Business.",
+        hero_desc: "Mobile games that entertain and affordable ERP solutions that empower small businesses — all from your pocket.",
+        hero_btn_games: "🎮 Explore Games",
+        hero_btn_erp: "📊 ERP Solutions",
+        games_tag: "Games",
+        games_title: "Our Games",
+        games_desc: "Fun, engaging mobile games built with passion and attention to detail.",
+        game1_desc: "A fun fly swatter game with realistic timing mechanics. Test your reflexes and compete for high scores!",
+        game2_desc: "Navigate through traffic jams and find your way out! Unique feature: flip your car once per level to escape tricky situations — not found in other games!",
+        game3_desc: "A speed battle between Ozzy and the Dodo! Match the colors, collect points, and unlock exclusive skins.",
+        game4_desc: "Build skyscrapers in various cities around the world! Stack with precision, compare your towers with city skylines, and explore different architectural styles.",
+        game5_desc: "Catch falling flowers in this relaxing yet challenging game. Enjoy beautiful visuals and calming gameplay!",
+        game6_desc: "Collect the eggs into the basket without the cheeky monkey breaking them! A fun and fast-paced egg catcher game with exciting challenges.",
+        coming_soon: "Coming Soon",
+        erp_tag: "ERP Solutions",
+        erp_title: "Smart ERP for Small Business",
+        erp_desc: "Affordable, mobile-first ERP solutions — your entire business in your pocket. No expensive hardware required.",
+        erp_hero_title: "All your reports, 24/7, in your pocket",
+        erp_hero_desc: "Track expenses, revenue, and inventory in real-time from your mobile device. Industry-specific solutions tailored for your business type.",
+        erp_hero_btn: "📞 Request a Demo",
+        erp_stat1: "Access",
+        erp_stat2: "Extra Hardware",
+        erp_stat3: "Mobile",
+        erp_f1_title: "Accounting & Finance",
+        erp_f1_desc: "Track all income, expenses, and financial reports in real-time.",
+        erp_f2_title: "Inventory Management",
+        erp_f2_desc: "Monitor stock levels, track products, and manage warehouse operations.",
+        erp_f3_title: "Sales & CRM",
+        erp_f3_desc: "Manage customer relationships, orders, and sales analytics.",
+        erp_f4_title: "HR & Workforce",
+        erp_f4_desc: "Employee management, attendance tracking, and payroll calculations.",
+        erp_f5_title: "Production Tracking",
+        erp_f5_desc: "Monitor manufacturing processes, raw materials, and production costs.",
+        erp_f6_title: "Mobile-First Design",
+        erp_f6_desc: "Built for smartphones — no need for expensive computers or servers.",
+        erp_industries_tag: "Industry Solutions",
+        erp_industries_desc: "Tailored for specific business types with industry-specific features.",
+        ind_agri: "Agriculture",
+        ind_retail: "Retail",
+        ind_bakery: "Bakery & Confectionery",
+        ind_restaurant: "Restaurants",
+        ind_manufacturing: "Window & Door Manufacturing",
+        ind_small: "Small Shops",
+        ind_more: "And More...",
+        about_tag: "About Us",
+        about_title: "About Ludappex",
+        about_p1: "Ludappex LLC is a technology company focused on creating engaging mobile games and affordable business solutions for small enterprises.",
+        about_p2: "We believe technology should be accessible to everyone. Our ERP solutions are designed to be affordable, easy to use, and require no additional hardware — everything works right from your smartphone.",
+        about_p3: "Our games are built with passion, prioritizing player experience over aggressive monetization. We create games that are fun to play, with non-intrusive, voluntary advertising.",
+        value1_title: "User-First Approach",
+        value1_desc: "Everything we build starts with the user experience in mind.",
+        value2_title: "Affordable Innovation",
+        value2_desc: "Enterprise-grade solutions at prices small businesses can afford.",
+        value3_title: "Mobile-First",
+        value3_desc: "Built for the mobile generation — your tools, always with you.",
+        value4_title: "Privacy & Security",
+        value4_desc: "Your data is yours. We take security and privacy seriously.",
+        privacy_tag: "Legal",
+        privacy_title: "Privacy Policy",
+        privacy_updated: "Last updated:",
+        privacy_intro: "Ludappex LLC (\"we\", \"our\", or \"us\") values your privacy. This policy describes how we collect, use, and protect information across our products.",
+        privacy_games_title: "🎮 Games",
+        privacy_games_p1: "Our games do not collect personally identifiable information such as your name, email, or phone number.",
+        privacy_admob_title: "Advertising (Google AdMob):",
+        privacy_admob_desc: "Our games use Google AdMob for advertisements. AdMob may collect advertising IDs, device information, and approximate location for ad delivery. See Google's Privacy Policy for details.",
+        privacy_local_title: "Local Storage:",
+        privacy_local_desc: "Game progress and settings are stored locally on your device and are never transmitted to any server.",
+        privacy_erp_title: "📊 ERP Solutions",
+        privacy_erp_p1: "Our ERP solutions may collect business-related data necessary for the operation of the service, including financial records, inventory data, employee information, and customer data.",
+        privacy_erp_p2: "Your data is securely protected through cloud technology. Unlike a paper ledger, there is no risk of losing your important information. We do not sell or share your business data with third parties.",
+        privacy_att_title: "📱 App Tracking Transparency (iOS)",
+        privacy_att_desc: "On iOS 14+, we request your permission before tracking activity across other apps. You may allow or deny tracking. Denying tracking means you will see non-personalized ads.",
+        privacy_children_title: "👶 Children's Privacy",
+        privacy_children_desc: "Some of our games (such as Ozzy vs Dodo and Ostrich vs Monkey) are designed for children aged 4+. These games do not collect any personal data and display only child-safe, non-personalized advertisements. We comply with COPPA and all applicable child safety regulations. For our other products, standard privacy practices apply.",
+        privacy_rights_title: "⚖️ Your Rights",
+        privacy_right1: "✦ Opt out of personalized advertising via device settings",
+        privacy_right2: "✦ Request deletion of your data",
+        privacy_right3: "✦ Access information about your stored data",
+        privacy_right4: "✦ Contact us with any privacy concerns",
+        privacy_changes_title: "📝 Changes",
+        privacy_changes_desc: "We may update this policy periodically. Changes will be posted on this page with an updated date.",
+        contact_tag: "Contact",
+        contact_title: "Get in Touch",
+        contact_desc: "Have a question, feedback, or interested in our ERP solutions? We'd love to hear from you.",
+        contact_info_title: "Contact Information",
+        contact_info_desc: "Reach out to us through any of the following channels.",
+        contact_website_label: "Website",
+        contact_location_label: "Location",
+        contact_location: "Baku, Azerbaijan",
+        form_name: "Name",
+        form_subject: "Subject",
+        form_message: "Message",
+        form_submit: "Send Message",
+        footer_rights: "All rights reserved."
+    },
+    az: {
+        nav_home: "Ana Səhifə",
+        nav_games: "Oyunlar",
+        nav_erp: "ERP Həlləri",
+        nav_about: "Haqqımızda",
+        nav_privacy: "Məxfilik",
+        nav_contact: "Əlaqə",
+        hero_badge: "🚀 Oyunlar & Biznes Həlləri",
+        hero_title_1: "Yarat. Oyna.",
+        hero_title_2: "Biznesini Böyüt.",
+        hero_desc: "Əyləndirici mobil oyunlar və kiçik biznesləri güclündirən münasib ERP həlləri — hamısı cibinizdə.",
+        hero_btn_games: "🎮 Oyunlara Bax",
+        hero_btn_erp: "📊 ERP Həlləri",
+        games_tag: "Oyunlar",
+        games_title: "Oyunlarımız",
+        games_desc: "Həvəslə və diqqətlə hazırlanmış əyləncəli mobil oyunlar.",
+        game1_desc: "Real vaxt mexanikası ilə əyləncəli milçək vuran oyun. Reflekslərinizi sınayın və yüksək xallar üçün yarışın!",
+        game2_desc: "Tıxaclardan çıx yolunu tap! Unikal xüsusiyyət: hər leveldə maşını bir dəfə döndərmə şansı — digər oyunlarda olmayan özəllik!",
+        game3_desc: "Ozzy və Dodo arasında sürət savaşı! Rəngləri düz tut, xallar yığ və eksklüziv skinlər al.",
+        game4_desc: "Dünyanın müxtəlif şəhərlərində müxtəlif tərz göydələnlər tik! Dəqiqliklə yığ, şəhərin ümumi mənzərəsinə əlavə et və digər göydələnlərlə müqayisə et.",
+        game5_desc: "Bu rahatladıcı, lakin çətin oyunda düşən çiçəkləri tut. Gözəl vizuallar və sakitləşdirici oyun!",
+        game6_desc: "Hiyləgər meymun sındırmadan yumurtaları səbətə yığ! Həyəcanlı çağırışlarla dolu əyləncəli və sürətli yumurta tutma oyunu.",
+        coming_soon: "Tezliklə",
+        erp_tag: "ERP Həlləri",
+        erp_title: "Kiçik Bizneslər üçün Ağıllı ERP",
+        erp_desc: "Münasib, mobil-əsaslı ERP həlləri — bütün biznesiniz cibinizdə. Bahalı avadanlıq lazım deyil.",
+        erp_hero_title: "Bütün hesabatlarınız, 24/7, cibinizdə",
+        erp_hero_desc: "Xərcləri, gəliri və ehtiyatları real vaxtda mobil cihazınızdan izləyin. Biznes növünüzə uyğunlaşdırılmış sahə-spesifik həllər.",
+        erp_hero_btn: "📞 Demo Tələb Et",
+        erp_stat1: "Giriş",
+        erp_stat2: "Əlavə Avadanlıq",
+        erp_stat3: "Mobil",
+        erp_f1_title: "Mühasibatlıq & Maliyyə",
+        erp_f1_desc: "Bütün gəlir, xərc və maliyyə hesabatlarını real vaxtda izləyin.",
+        erp_f2_title: "Anbar İdarəetməsi",
+        erp_f2_desc: "Stok səviyyələrini izləyin, məhsulları idarə edin və anbar əməliyyatlarını optimallaşdırın.",
+        erp_f3_title: "Satış & CRM",
+        erp_f3_desc: "Müştəri əlaqələrini, sifarişləri və satış analitikasını idarə edin.",
+        erp_f4_title: "HR & İşçi Qüvvəsi",
+        erp_f4_desc: "İşçi idarəetməsi, davamiyyət izləmə və əmək haqqı hesablamaları.",
+        erp_f5_title: "İstehsal İzləmə",
+        erp_f5_desc: "İstehsal proseslərini, xammalı və istehsal xərclərini izləyin.",
+        erp_f6_title: "Mobil-Əsaslı Dizayn",
+        erp_f6_desc: "Smartfonlar üçün qurulub — bahalı kompüterlərə və ya serverlərə ehtiyac yoxdur.",
+        erp_industries_tag: "Sahə Həlləri",
+        erp_industries_desc: "Müxtəlif biznes növlərinə uyğunlaşdırılmış sahə-spesifik funksiyalar.",
+        ind_agri: "Kənd Təsərrüfatı",
+        ind_retail: "Pərakəndə Satış",
+        ind_bakery: "Şirniyyat İstehsalı",
+        ind_restaurant: "Restoranlar",
+        ind_manufacturing: "Qapı & Pəncərə İstehsalı",
+        ind_small: "Kiçik Mağazalar",
+        ind_more: "Və Daha Çox...",
+        about_tag: "Haqqımızda",
+        about_title: "Ludappex Haqqında",
+        about_p1: "Ludappex MMC maraqlı mobil oyunlar və kiçik müəssisələr üçün münasib biznes həlləri yaratmağa yönəlmiş texnologiya şirkətidir.",
+        about_p2: "Biz texnologiyanın hər kəs üçün əlçatan olmalı olduğuna inanırıq. ERP həllərimiz münasib, istifadəsi asan və əlavə avadanlıq tələb etmir — hər şey smartfonunuzdan işləyir.",
+        about_p3: "Oyunlarımız həvəslə qurulub, aqressiv monetizasiya yerinə oyunçu təcrübəsinə üstünlük verilir. Müdaxiləsiz, könüllü reklamlarla əyləncəli oyunlar yaradırıq.",
+        value1_title: "İstifadəçi Yönümlü",
+        value1_desc: "Qurduğumuz hər şey istifadəçi təcrübəsindən başlayır.",
+        value2_title: "Münasib İnnovasiya",
+        value2_desc: "Kiçik bizneslərin ödəyə biləcəyi qiymətlərdə müəssisə səviyyəli həllər.",
+        value3_title: "Mobil-Əsaslı",
+        value3_desc: "Mobil nəsil üçün qurulub — alətləriniz həmişə yanınızda.",
+        value4_title: "Məxfilik & Təhlükəsizlik",
+        value4_desc: "Datanız sizindir. Təhlükəsizlik və məxfiliyə ciddi yanaşırıq.",
+        privacy_tag: "Hüquqi",
+        privacy_title: "Məxfilik Siyasəti",
+        privacy_updated: "Son yenilənmə:",
+        privacy_intro: "Ludappex MMC (\"biz\") məxfiliyinizə dəyər verir. Bu siyasət məhsullarımız üzrə məlumatların necə toplandığını, istifadə edildiyini və qorunduğunu təsvir edir.",
+        privacy_games_title: "🎮 Oyunlar",
+        privacy_games_p1: "Oyunlarımız adınız, emailiniz və ya telefon nömrəniz kimi şəxsi məlumatları toplamır.",
+        privacy_admob_title: "Reklam (Google AdMob):",
+        privacy_admob_desc: "Oyunlarımız reklamlar üçün Google AdMob istifadə edir. AdMob reklam ID-ləri, cihaz məlumatları və təqribi yer məlumatını toplaya bilər. Ətraflı məlumat üçün Google-un Məxfilik Siyasətinə baxın.",
+        privacy_local_title: "Yerli Saxlama:",
+        privacy_local_desc: "Oyun irəliləyişi və parametrlər cihazınızda yerli olaraq saxlanılır və heç vaxt heç bir serverə ötürülmür.",
+        privacy_erp_title: "📊 ERP Həlləri",
+        privacy_erp_p1: "ERP həllərimiz xidmətin işləməsi üçün lazım olan bizneslə bağlı məlumatları toplaya bilər, o cümlədən maliyyə qeydləri, inventar datası, işçi məlumatları və müştəri datası.",
+        privacy_erp_p2: "Məlumatlarınız bulud texnologiyası vasitəsilə etibarlı qorunur. Hesabat kitabçanızdan fərqli olaraq vacib məlumatlarınızı itirmək təhlükəsi yoxdur. Biznes datanızı üçüncü tərəflərə satmırıq və ya paylaşmırıq.",
+        privacy_att_title: "📱 Tətbiq İzləmə Şəffaflığı (iOS)",
+        privacy_att_desc: "iOS 14+-da digər tətbiqlər üzrə fəaliyyətinizi izləməzdən əvvəl icazənizi istəyirik. İzləməni qəbul və ya rədd edə bilərsiniz.",
+        privacy_children_title: "👶 Uşaqların Məxfiliyi",
+        privacy_children_desc: "Bəzi oyunlarımız (Ozzy vs Dodo və Ostrich vs Monkey kimi) 4+ yaş uşaqlar üçün nəzərdə tutulub. Bu oyunlar heç bir şəxsi məlumat toplamır və yalnız uşaqlar üçün təhlükəsiz, fərdiləşdirilməmiş reklamlar göstərir. COPPA və bütün müvafiq uşaq təhlükəsizliyi qaydalarına əməl edirik. Digər məhsullarımız üçün standart məxfilik qaydaları tətbiq olunur.",
+        privacy_rights_title: "⚖️ Hüquqlarınız",
+        privacy_right1: "✦ Cihaz parametrləri vasitəsilə fərdiləşdirilmiş reklamlardan imtina edin",
+        privacy_right2: "✦ Datanızın silinməsini tələb edin",
+        privacy_right3: "✦ Saxlanılan datanız haqqında məlumat əldə edin",
+        privacy_right4: "✦ İstənilən məxfilik narahatlığı ilə bizimlə əlaqə saxlayın",
+        privacy_changes_title: "📝 Dəyişikliklər",
+        privacy_changes_desc: "Bu siyasəti vaxtaşırı yeniləyə bilərik. Dəyişikliklər yenilənmiş tarixlə bu səhifədə dərc olunacaq.",
+        contact_tag: "Əlaqə",
+        contact_title: "Bizimlə Əlaqə",
+        contact_desc: "Sualınız, rəyiniz var və ya ERP həllərimizlə maraqlanırsınız? Sizdən eşitməkdən məmnun olarıq.",
+        contact_info_title: "Əlaqə Məlumatları",
+        contact_info_desc: "Aşağıdakı kanallar vasitəsilə bizimlə əlaqə saxlayın.",
+        contact_website_label: "Veb sayt",
+        contact_location_label: "Ünvan",
+        contact_location: "Bakı, Azərbaycan",
+        form_name: "Ad",
+        form_subject: "Mövzu",
+        form_message: "Mesaj",
+        form_submit: "Mesaj Göndər",
+        footer_rights: "Bütün hüquqlar qorunur."
+    },
+    tr: {
+        nav_home: "Ana Sayfa",
+        nav_games: "Oyunlar",
+        nav_erp: "ERP Çözümleri",
+        nav_about: "Hakkımızda",
+        nav_privacy: "Gizlilik",
+        nav_contact: "İletişim",
+        hero_badge: "🚀 Oyunlar & Kurumsal Çözümler",
+        hero_title_1: "Oluştur. Oyna.",
+        hero_title_2: "İşini Büyüt.",
+        hero_desc: "Eğlendiren mobil oyunlar ve küçük işletmeleri güçlendiren uygun fiyatlı ERP çözümleri — hepsi cebinizde.",
+        hero_btn_games: "🎮 Oyunları Keşfet",
+        hero_btn_erp: "📊 ERP Çözümleri",
+        games_tag: "Oyunlar",
+        games_title: "Oyunlarımız",
+        games_desc: "Tutkuyla ve özenle hazırlanmış eğlenceli mobil oyunlar.",
+        game1_desc: "Gerçekçi zamanlama mekaniğiyle eğlenceli bir sinek vurma oyunu. Reflekslerinizi test edin!",
+        game2_desc: "Trafik sıkışıklığından kurtulmanın yolunu bul! Benzersiz özellik: her seviyede arabanı bir kez döndürme şansı — diğer oyunlarda bulunmayan özellik!",
+        game3_desc: "Ozzy ve Dodo arasında hız savaşı! Renkleri eşleştir, puan topla ve özel kostümler aç.",
+        game4_desc: "Dünyanın çeşitli şehirlerinde farklı tarz gökdelenler inşa et! Hassasiyetle istifle, şehir silüetiyle karşılaştır ve farklı mimari tarzları keşfet.",
+        game5_desc: "Bu rahatlatıcı ama zorlu oyunda düşen çiçekleri yakala. Güzel görseller ve sakinleştirici oynanış!",
+        game6_desc: "Yaramaz maymun kırmadan yumurtaları sepete topla! Heyecan verici görevlerle dolu eğlenceli ve hızlı tempolu bir yumurta yakalama oyunu.",
+        coming_soon: "Yakında",
+        erp_tag: "ERP Çözümleri",
+        erp_title: "Küçük İşletmeler için Akıllı ERP",
+        erp_desc: "Uygun fiyatlı, mobil öncelikli ERP çözümleri — tüm işletmeniz cebinizde. Pahalı donanıma gerek yok.",
+        erp_hero_title: "Tüm raporlarınız, 7/24, cebinizde",
+        erp_hero_desc: "Giderleri, gelirleri ve envanteri mobil cihazınızdan gerçek zamanlı takip edin. İş türünüze özel sektörel çözümler.",
+        erp_hero_btn: "📞 Demo Talep Et",
+        erp_stat1: "Erişim",
+        erp_stat2: "Ek Donanım",
+        erp_stat3: "Mobil",
+        erp_f1_title: "Muhasebe & Finans",
+        erp_f1_desc: "Tüm gelir, gider ve finansal raporları gerçek zamanlı takip edin.",
+        erp_f2_title: "Envanter Yönetimi",
+        erp_f2_desc: "Stok seviyelerini takip edin, ürünleri yönetin ve depo operasyonlarını optimize edin.",
+        erp_f3_title: "Satış & CRM",
+        erp_f3_desc: "Müşteri ilişkilerini, siparişleri ve satış analitiğini yönetin.",
+        erp_f4_title: "İK & İşgücü",
+        erp_f4_desc: "Çalışan yönetimi, devam takibi ve bordro hesaplamaları.",
+        erp_f5_title: "Üretim Takibi",
+        erp_f5_desc: "Üretim süreçlerini, hammaddeleri ve üretim maliyetlerini izleyin.",
+        erp_f6_title: "Mobil Öncelikli Tasarım",
+        erp_f6_desc: "Akıllı telefonlar için tasarlandı — pahalı bilgisayar veya sunuculara gerek yok.",
+        erp_industries_tag: "Sektör Çözümleri",
+        erp_industries_desc: "Sektöre özel özelliklerle farklı iş türlerine uyarlanmış.",
+        ind_agri: "Tarım",
+        ind_retail: "Perakende",
+        ind_bakery: "Pastane & Şekerleme",
+        ind_restaurant: "Restoranlar",
+        ind_manufacturing: "Kapı & Pencere Üretimi",
+        ind_small: "Küçük Dükkanlar",
+        ind_more: "Ve Daha Fazlası...",
+        about_tag: "Hakkımızda",
+        about_title: "Ludappex Hakkında",
+        about_p1: "Ludappex LLC, ilgi çekici mobil oyunlar ve küçük işletmeler için uygun fiyatlı iş çözümleri oluşturmaya odaklanan bir teknoloji şirketidir.",
+        about_p2: "Teknolojinin herkes için erişilebilir olması gerektiğine inanıyoruz. ERP çözümlerimiz uygun fiyatlı, kullanımı kolay ve ek donanım gerektirmez.",
+        about_p3: "Oyunlarımız tutkuyla geliştirilir, agresif para kazanma yerine oyuncu deneyimine öncelik verilir.",
+        value1_title: "Kullanıcı Öncelikli",
+        value1_desc: "Yaptığımız her şey kullanıcı deneyimiyle başlar.",
+        value2_title: "Uygun Fiyatlı İnovasyon",
+        value2_desc: "Küçük işletmelerin karşılayabileceği fiyatlarla kurumsal çözümler.",
+        value3_title: "Mobil Öncelikli",
+        value3_desc: "Mobil nesil için tasarlandı — araçlarınız her zaman yanınızda.",
+        value4_title: "Gizlilik & Güvenlik",
+        value4_desc: "Verileriniz sizindir. Güvenlik ve gizliliği ciddiye alıyoruz.",
+        privacy_tag: "Hukuki",
+        privacy_title: "Gizlilik Politikası",
+        privacy_updated: "Son güncelleme:",
+        privacy_intro: "Ludappex LLC gizliliğinize değer verir. Bu politika, ürünlerimiz genelinde bilgilerin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.",
+        privacy_games_title: "🎮 Oyunlar",
+        privacy_games_p1: "Oyunlarımız adınız, e-postanız veya telefon numaranız gibi kişisel bilgileri toplamaz.",
+        privacy_admob_title: "Reklamcılık (Google AdMob):",
+        privacy_admob_desc: "Oyunlarımız reklamlar için Google AdMob kullanır. AdMob, reklam kimlikleri, cihaz bilgileri ve yaklaşık konum toplayabilir.",
+        privacy_local_title: "Yerel Depolama:",
+        privacy_local_desc: "Oyun ilerlemeniz ve ayarlarınız cihazınızda yerel olarak saklanır ve hiçbir sunucuya iletilmez.",
+        privacy_erp_title: "📊 ERP Çözümleri",
+        privacy_erp_p1: "ERP çözümlerimiz, hizmetin işletilmesi için gerekli iş verilerini toplayabilir.",
+        privacy_erp_p2: "Verileriniz bulut teknolojisi ile güvenle korunur. Kağıt defterin aksine, önemli bilgilerinizi kaybetme riski yoktur. İş verilerinizi üçüncü taraflarla satmaz veya paylaşmayız.",
+        privacy_att_title: "📱 Uygulama İzleme Şeffaflığı (iOS)",
+        privacy_att_desc: "iOS 14+'da diğer uygulamalar genelinde etkinliğinizi izlemeden önce izninizi isteriz.",
+        privacy_children_title: "👶 Çocukların Gizliliği",
+        privacy_children_desc: "Bazı oyunlarımız (Ozzy vs Dodo ve Ostrich vs Monkey gibi) 4+ yaş çocuklar için tasarlanmıştır. Bu oyunlar hiçbir kişisel veri toplamaz ve yalnızca çocuklar için güvenli, kişiselleştirilmemiş reklamlar gösterir. COPPA ve tüm ilgili çocuk güvenliği düzenlemelerine uyuyoruz.",
+        privacy_rights_title: "⚖️ Haklarınız",
+        privacy_right1: "✦ Cihaz ayarları üzerinden kişiselleştirilmiş reklamlardan çıkın",
+        privacy_right2: "✦ Verilerinizin silinmesini talep edin",
+        privacy_right3: "✦ Saklanan verileriniz hakkında bilgi alın",
+        privacy_right4: "✦ Herhangi bir gizlilik endişesiyle bizimle iletişime geçin",
+        privacy_changes_title: "📝 Değişiklikler",
+        privacy_changes_desc: "Bu politikayı zaman zaman güncelleyebiliriz.",
+        contact_tag: "İletişim",
+        contact_title: "Bize Ulaşın",
+        contact_desc: "Sorunuz, geri bildiriminiz var mı veya ERP çözümlerimizle ilgileniyor musunuz? Sizden duymaktan memnuniyet duyarız.",
+        contact_info_title: "İletişim Bilgileri",
+        contact_info_desc: "Aşağıdaki kanallardan bize ulaşın.",
+        contact_website_label: "Web sitesi",
+        contact_location_label: "Konum",
+        contact_location: "Bakü, Azerbaycan",
+        form_name: "İsim",
+        form_subject: "Konu",
+        form_message: "Mesaj",
+        form_submit: "Mesaj Gönder",
+        footer_rights: "Tüm hakları saklıdır."
+    },
+    ru: {
+        nav_home: "Главная",
+        nav_games: "Игры",
+        nav_erp: "ERP Решения",
+        nav_about: "О Нас",
+        nav_privacy: "Конфиденциальность",
+        nav_contact: "Контакты",
+        hero_badge: "🚀 Игры & Бизнес-Решения",
+        hero_title_1: "Создавай. Играй.",
+        hero_title_2: "Развивай Бизнес.",
+        hero_desc: "Увлекательные мобильные игры и доступные ERP-решения для малого бизнеса — всё в вашем кармане.",
+        hero_btn_games: "🎮 Наши Игры",
+        hero_btn_erp: "📊 ERP Решения",
+        games_tag: "Игры",
+        games_title: "Наши Игры",
+        games_desc: "Увлекательные мобильные игры, созданные с страстью и вниманием к деталям.",
+        game1_desc: "Весёлая игра с мухобойкой с реалистичной механикой. Проверьте свои рефлексы и соревнуйтесь за рекорды!",
+        game2_desc: "Найдите выход из пробки! Уникальная особенность: переверните машину один раз за уровень, чтобы выбраться из сложных ситуаций — такого нет в других играх!",
+        game3_desc: "Скоростная битва Оззи и Додо! Совпадайте цвета, собирайте очки и открывайте эксклюзивные скины.",
+        game4_desc: "Стройте небоскрёбы в разных городах мира! Складывайте с точностью, сравнивайте свои башни с городскими панорамами и исследуйте различные архитектурные стили.",
+        game5_desc: "Ловите падающие цветы в этой расслабляющей, но сложной игре. Наслаждайтесь красивой графикой и спокойным геймплеем!",
+        game6_desc: "Собирайте яйца в корзину, пока хитрая обезьяна их не разбила! Весёлая и динамичная игра-ловилка с увлекательными испытаниями.",
+        coming_soon: "Скоро",
+        erp_tag: "ERP Решения",
+        erp_title: "Умная ERP для Малого Бизнеса",
+        erp_desc: "Доступные мобильные ERP-решения — весь ваш бизнес в кармане. Дорогое оборудование не требуется.",
+        erp_hero_title: "Все отчёты, 24/7, в вашем кармане",
+        erp_hero_desc: "Отслеживайте расходы, доходы и запасы в реальном времени с мобильного устройства. Отраслевые решения для вашего бизнеса.",
+        erp_hero_btn: "📞 Запросить Демо",
+        erp_stat1: "Доступ",
+        erp_stat2: "Доп. Оборудование",
+        erp_stat3: "Мобильность",
+        erp_f1_title: "Бухгалтерия & Финансы",
+        erp_f1_desc: "Отслеживайте все доходы, расходы и финансовые отчёты в реальном времени.",
+        erp_f2_title: "Управление Складом",
+        erp_f2_desc: "Мониторинг уровня запасов, отслеживание товаров и управление складскими операциями.",
+        erp_f3_title: "Продажи & CRM",
+        erp_f3_desc: "Управление клиентскими отношениями, заказами и аналитикой продаж.",
+        erp_f4_title: "HR & Персонал",
+        erp_f4_desc: "Управление сотрудниками, учёт посещаемости и расчёт заработной платы.",
+        erp_f5_title: "Отслеживание Производства",
+        erp_f5_desc: "Мониторинг производственных процессов, сырья и себестоимости.",
+        erp_f6_title: "Мобильный Дизайн",
+        erp_f6_desc: "Создано для смартфонов — дорогие компьютеры и серверы не нужны.",
+        erp_industries_tag: "Отраслевые Решения",
+        erp_industries_desc: "Адаптировано для различных типов бизнеса с отраслевыми функциями.",
+        ind_agri: "Сельское Хозяйство",
+        ind_retail: "Розничная Торговля",
+        ind_bakery: "Кондитерская",
+        ind_restaurant: "Рестораны",
+        ind_manufacturing: "Производство Окон и Дверей",
+        ind_small: "Малые Магазины",
+        ind_more: "И Другое...",
+        about_tag: "О Нас",
+        about_title: "О Ludappex",
+        about_p1: "Ludappex LLC — технологическая компания, специализирующаяся на создании увлекательных мобильных игр и доступных бизнес-решений для малых предприятий.",
+        about_p2: "Мы верим, что технологии должны быть доступны каждому. Наши ERP-решения доступны по цене, просты в использовании и не требуют дополнительного оборудования.",
+        about_p3: "Наши игры созданы с душой. Мы отдаём приоритет опыту игрока, а не агрессивной монетизации. Ненавязчивая, добровольная реклама.",
+        value1_title: "Ориентация на Пользователя",
+        value1_desc: "Всё, что мы создаём, начинается с заботы об опыте пользователя.",
+        value2_title: "Доступные Инновации",
+        value2_desc: "Решения корпоративного уровня по ценам, доступным малому бизнесу.",
+        value3_title: "Мобильность Прежде Всего",
+        value3_desc: "Создано для мобильного поколения — ваши инструменты всегда с вами.",
+        value4_title: "Конфиденциальность & Безопасность",
+        value4_desc: "Ваши данные — это ваши данные. Мы серьёзно относимся к безопасности.",
+        privacy_tag: "Правовая информация",
+        privacy_title: "Политика Конфиденциальности",
+        privacy_updated: "Последнее обновление:",
+        privacy_intro: "Ludappex LLC ценит вашу конфиденциальность. Эта политика описывает, как мы собираем, используем и защищаем информацию в наших продуктах.",
+        privacy_games_title: "🎮 Игры",
+        privacy_games_p1: "Наши игры не собирают личную информацию, такую как имя, email или номер телефона.",
+        privacy_admob_title: "Реклама (Google AdMob):",
+        privacy_admob_desc: "Наши игры используют Google AdMob для рекламы. AdMob может собирать рекламные идентификаторы, информацию об устройстве и приблизительное местоположение.",
+        privacy_local_title: "Локальное Хранилище:",
+        privacy_local_desc: "Прогресс игры и настройки хранятся локально на вашем устройстве и никогда не передаются на серверы.",
+        privacy_erp_title: "📊 ERP Решения",
+        privacy_erp_p1: "Наши ERP-решения могут собирать бизнес-данные, необходимые для работы сервиса.",
+        privacy_erp_p2: "Ваши данные надёжно защищены облачными технологиями. В отличие от бумажного журнала, риск потери важной информации отсутствует. Мы не продаём и не передаём ваши данные третьим лицам.",
+        privacy_att_title: "📱 Прозрачность Отслеживания (iOS)",
+        privacy_att_desc: "На iOS 14+ мы запрашиваем ваше разрешение перед отслеживанием активности в других приложениях.",
+        privacy_children_title: "👶 Конфиденциальность Детей",
+        privacy_children_desc: "Некоторые наши игры (например, Ozzy vs Dodo и Ostrich vs Monkey) предназначены для детей от 4 лет. Эти игры не собирают личные данные и показывают только безопасную для детей неперсонализированную рекламу. Мы соблюдаем COPPA и все применимые нормы детской безопасности.",
+        privacy_rights_title: "⚖️ Ваши Права",
+        privacy_right1: "✦ Отказ от персонализированной рекламы через настройки устройства",
+        privacy_right2: "✦ Запрос на удаление ваших данных",
+        privacy_right3: "✦ Получение информации о хранимых данных",
+        privacy_right4: "✦ Связь с нами по любым вопросам конфиденциальности",
+        privacy_changes_title: "📝 Изменения",
+        privacy_changes_desc: "Мы можем периодически обновлять эту политику. Изменения будут опубликованы на этой странице.",
+        contact_tag: "Контакты",
+        contact_title: "Свяжитесь с Нами",
+        contact_desc: "Есть вопрос, отзыв или интересуют наши ERP-решения? Мы будем рады вас услышать.",
+        contact_info_title: "Контактная Информация",
+        contact_info_desc: "Свяжитесь с нами через любой из каналов.",
+        contact_website_label: "Веб-сайт",
+        contact_location_label: "Адрес",
+        contact_location: "Баку, Азербайджан",
+        form_name: "Имя",
+        form_subject: "Тема",
+        form_message: "Сообщение",
+        form_submit: "Отправить",
+        footer_rights: "Все права защищены."
+    },
+    ja: {
+        nav_home: "ホーム",
+        nav_games: "ゲーム",
+        nav_erp: "ERPソリューション",
+        nav_about: "会社概要",
+        nav_privacy: "プライバシー",
+        nav_contact: "お問い合わせ",
+        hero_badge: "🚀 ゲーム＆ビジネスソリューション",
+        hero_title_1: "創る。遊ぶ。",
+        hero_title_2: "ビジネスを成長させる。",
+        hero_desc: "楽しいモバイルゲームと、中小企業を支える手頃なERPソリューション — すべてポケットの中に。",
+        hero_btn_games: "🎮 ゲームを見る",
+        hero_btn_erp: "📊 ERPソリューション",
+        games_tag: "ゲーム",
+        games_title: "私たちのゲーム",
+        games_desc: "情熱と細部へのこだわりで作られた、楽しいモバイルゲーム。",
+        game1_desc: "リアルなタイミング機能を備えた楽しいハエたたきゲーム。反射神経を試してハイスコアを目指そう！",
+        game2_desc: "渋滞から抜け出す道を見つけよう！ユニークな機能：レベルごとに1回車を反転させるチャンス — 他のゲームにはない特別な機能！",
+        game3_desc: "オジーとドードーのスピードバトル！色を合わせてポイントを集め、限定スキンをアンロックしよう。",
+        game4_desc: "世界各地の都市でさまざまなスタイルの超高層ビルを建てよう！正確に積み上げ、街のスカイラインと比較し、異なる建築スタイルを探索しよう。",
+        game5_desc: "このリラックスしつつも挑戦的なゲームで落ちてくる花をキャッチ。美しいビジュアルと穏やかなゲームプレイを楽しもう！",
+        game6_desc: "いたずらなサルに割られる前に卵をカゴに集めよう！エキサイティングなチャレンジ満載の楽しいエッグキャッチャーゲーム。",
+        coming_soon: "近日公開",
+        erp_tag: "ERPソリューション",
+        erp_title: "中小企業向けスマートERP",
+        erp_desc: "手頃な価格のモバイルファーストERPソリューション — ビジネス全体をポケットに。高額な機器は不要です。",
+        erp_hero_title: "すべてのレポートを24時間365日、ポケットに",
+        erp_hero_desc: "経費、収益、在庫をモバイルデバイスからリアルタイムで追跡。業種別にカスタマイズされたソリューション。",
+        erp_hero_btn: "📞 デモをリクエスト",
+        erp_stat1: "アクセス",
+        erp_stat2: "追加機器",
+        erp_stat3: "モバイル",
+        erp_f1_title: "会計＆財務",
+        erp_f1_desc: "すべての収入、支出、財務レポートをリアルタイムで追跡。",
+        erp_f2_title: "在庫管理",
+        erp_f2_desc: "在庫レベルの監視、商品の追跡、倉庫業務の管理。",
+        erp_f3_title: "販売＆CRM",
+        erp_f3_desc: "顧客関係、注文、販売分析の管理。",
+        erp_f4_title: "人事＆労務",
+        erp_f4_desc: "従業員管理、勤怠管理、給与計算。",
+        erp_f5_title: "生産管理",
+        erp_f5_desc: "製造プロセス、原材料、生産コストの監視。",
+        erp_f6_title: "モバイルファーストデザイン",
+        erp_f6_desc: "スマートフォン向けに設計 — 高価なコンピューターやサーバーは不要。",
+        erp_industries_tag: "業種別ソリューション",
+        erp_industries_desc: "業種固有の機能で、さまざまなビジネスタイプに対応。",
+        ind_agri: "農業",
+        ind_retail: "小売業",
+        ind_bakery: "製菓・ベーカリー",
+        ind_restaurant: "レストラン",
+        ind_manufacturing: "窓・ドア製造",
+        ind_small: "小規模店舗",
+        ind_more: "その他多数...",
+        about_tag: "会社概要",
+        about_title: "Ludappexについて",
+        about_p1: "Ludappex LLCは、魅力的なモバイルゲームと中小企業向けの手頃なビジネスソリューションの開発に注力するテクノロジー企業です。",
+        about_p2: "テクノロジーは誰にでもアクセス可能であるべきだと信じています。ERPソリューションは手頃な価格で使いやすく、追加機器を必要としません — すべてスマートフォンから利用できます。",
+        about_p3: "私たちのゲームは情熱を込めて開発されており、過度な収益化よりもプレイヤー体験を優先しています。控えめで任意の広告による楽しいゲームを作っています。",
+        value1_title: "ユーザーファースト",
+        value1_desc: "私たちが作るすべてのものは、ユーザー体験から始まります。",
+        value2_title: "手頃なイノベーション",
+        value2_desc: "中小企業が手の届く価格でエンタープライズレベルのソリューション。",
+        value3_title: "モバイルファースト",
+        value3_desc: "モバイル世代のために設計 — ツールはいつもあなたと共に。",
+        value4_title: "プライバシー＆セキュリティ",
+        value4_desc: "あなたのデータはあなたのもの。セキュリティとプライバシーを真剣に考えています。",
+        privacy_tag: "法的情報",
+        privacy_title: "プライバシーポリシー",
+        privacy_updated: "最終更新日：",
+        privacy_intro: "Ludappex LLC（「当社」）はお客様のプライバシーを尊重します。本ポリシーは、当社製品における情報の収集、使用、保護について説明します。",
+        privacy_games_title: "🎮 ゲーム",
+        privacy_games_p1: "当社のゲームは、お名前、メールアドレス、電話番号などの個人情報を収集しません。",
+        privacy_admob_title: "広告（Google AdMob）：",
+        privacy_admob_desc: "当社のゲームは広告にGoogle AdMobを使用しています。AdMobは広告ID、デバイス情報、おおよその位置情報を収集する場合があります。",
+        privacy_local_title: "ローカルストレージ：",
+        privacy_local_desc: "ゲームの進行状況と設定はデバイスにローカルに保存され、サーバーに送信されることはありません。",
+        privacy_erp_title: "📊 ERPソリューション",
+        privacy_erp_p1: "当社のERPソリューションは、サービスの運営に必要なビジネスデータを収集する場合があります。",
+        privacy_erp_p2: "お客様のデータはクラウド技術により安全に保護されています。紙の帳簿とは異なり、重要な情報を失うリスクはありません。お客様のビジネスデータを第三者に販売・共有することはありません。",
+        privacy_att_title: "📱 アプリトラッキング透明性（iOS）",
+        privacy_att_desc: "iOS 14以降では、他のアプリでのアクティビティを追跡する前に許可を求めます。追跡を許可または拒否できます。",
+        privacy_children_title: "👶 お子様のプライバシー",
+        privacy_children_desc: "一部のゲーム（Ozzy vs DodoやOstrich vs Monkeyなど）は4歳以上のお子様向けに設計されています。これらのゲームは個人データを一切収集せず、お子様に安全な非パーソナライズ広告のみを表示します。COPPAおよび該当するすべての児童安全規制を遵守しています。",
+        privacy_rights_title: "⚖️ お客様の権利",
+        privacy_right1: "✦ デバイス設定でパーソナライズ広告をオプトアウト",
+        privacy_right2: "✦ データの削除をリクエスト",
+        privacy_right3: "✦ 保存されているデータに関する情報にアクセス",
+        privacy_right4: "✦ プライバシーに関する懸念についてお問い合わせ",
+        privacy_changes_title: "📝 変更について",
+        privacy_changes_desc: "本ポリシーは随時更新される場合があります。変更は更新日と共にこのページに掲載されます。",
+        contact_tag: "お問い合わせ",
+        contact_title: "お問い合わせ",
+        contact_desc: "ご質問、フィードバック、またはERPソリューションにご興味がありますか？お気軽にご連絡ください。",
+        contact_info_title: "連絡先情報",
+        contact_info_desc: "以下のチャネルからお問い合わせください。",
+        contact_website_label: "ウェブサイト",
+        contact_location_label: "所在地",
+        contact_location: "バクー、アゼルバイジャン",
+        form_name: "お名前",
+        form_subject: "件名",
+        form_message: "メッセージ",
+        form_submit: "送信する",
+        footer_rights: "全著作権所有。"
+    }
+};
+
+// ========== LANGUAGE SWITCHING ==========
+let currentLang = 'en';
+
+function setLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+
+    // Update all elements with data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+            el.textContent = t[key];
+        }
+    });
+
+    // Update lang buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === (lang === 'ja' ? 'JP' : lang.toUpperCase()));
+    });
+
+    // Update html lang attribute
+    document.documentElement.lang = lang;
+
+    // Save preference
+    try { localStorage.setItem('ludappex_lang', lang); } catch(e) {}
+}
+
+// ========== MOBILE MENU ==========
+function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+}
+
+// Close mobile menu on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+    });
+});
+
+// ========== CONTACT FORM (mailto) ==========
+function sendEmail() {
+    const name = document.getElementById('formName').value;
+    const email = document.getElementById('formEmail').value;
+    const subject = document.getElementById('formSubject').value;
+    const message = document.getElementById('formMessage').value;
+
+    const body = `Name: ${name}%0AEmail: ${email}%0A%0A${encodeURIComponent(message)}`;
+    const mailtoLink = `mailto:nizamiabdullayev@ludappex.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    window.location.href = mailtoLink;
+}
+
+// ========== INIT ==========
+window.addEventListener('DOMContentLoaded', () => {
+    // Load saved language
+    try {
+        const saved = localStorage.getItem('ludappex_lang');
+        if (saved && translations[saved]) {
+            setLang(saved);
+        }
+    } catch(e) {}
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
