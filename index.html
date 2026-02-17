@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ludappex — Games & ERP Solutions</title>
     <meta name="description" content="Ludappex LLC — Mobile Games & Affordable ERP Solutions for Small Businesses">
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -67,14 +68,15 @@
         }
 
         .nav-logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo-img {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
         }
 
         .nav-links {
@@ -753,13 +755,15 @@
         }
 
         .footer-logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 800;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-logo-img {
+            height: 48px;
+            width: auto;
+            border-radius: 8px;
         }
 
         .footer p {
@@ -819,10 +823,66 @@
 </head>
 <body>
 
+<!-- ========== VIDEO INTRO OVERLAY ========== -->
+<div id="introOverlay">
+    <video id="introVideo" muted playsinline>
+        <source src="intro.mp4" type="video/mp4">
+    </video>
+    <button id="skipBtn" onclick="skipIntro()">Skip ⟩</button>
+</div>
+
+<style>
+    #introOverlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #0D1117;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.8s ease;
+    }
+
+    #introOverlay.fade-out {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    #introVideo {
+        max-width: 80%;
+        max-height: 80vh;
+        border-radius: 16px;
+    }
+
+    #skipBtn {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        padding: 0.6rem 1.5rem;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: rgba(255,255,255,0.7);
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.2s;
+    }
+
+    #skipBtn:hover {
+        background: rgba(255,255,255,0.2);
+        color: white;
+    }
+</style>
+
 <!-- ========== NAVBAR ========== -->
 <nav class="navbar">
     <div class="navbar-inner">
-        <a href="#" class="nav-logo">LUDAPPEX</a>
+        <a href="#" class="nav-logo">
+            <img src="logo.svg" alt="LUDAPPEX" class="nav-logo-img">
+        </a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home" data-i18n="nav_home">Home</a></li>
             <li><a href="#games" data-i18n="nav_games">Games</a></li>
@@ -1207,7 +1267,9 @@
 <!-- ========== FOOTER ========== -->
 <footer class="footer">
     <div class="footer-inner">
-        <div class="footer-logo">LUDAPPEX</div>
+        <div class="footer-logo">
+            <img src="logo.svg" alt="LUDAPPEX" class="footer-logo-img">
+        </div>
         <div class="footer-links">
             <a href="#games" data-i18n="nav_games">Games</a>
             <a href="#erp" data-i18n="nav_erp">ERP Solutions</a>
@@ -1220,6 +1282,46 @@
 </footer>
 
 <script>
+// ========== VIDEO INTRO ==========
+function skipIntro() {
+    const overlay = document.getElementById('introOverlay');
+    const video = document.getElementById('introVideo');
+    overlay.classList.add('fade-out');
+    video.pause();
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    }, 800);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('introVideo');
+    const overlay = document.getElementById('introOverlay');
+    
+    document.body.style.overflow = 'hidden';
+    
+    // Try to autoplay
+    video.play().catch(() => {
+        // If autoplay blocked, skip intro
+        skipIntro();
+    });
+    
+    // When video ends, fade out
+    video.addEventListener('ended', () => {
+        skipIntro();
+    });
+
+    // Check if video played once before in this session
+    try {
+        if (sessionStorage.getItem('ludappex_intro_seen')) {
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        } else {
+            sessionStorage.setItem('ludappex_intro_seen', '1');
+        }
+    } catch(e) {}
+});
+
 // ========== TRANSLATIONS ==========
 const translations = {
     en: {
